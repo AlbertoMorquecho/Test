@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.mycompany.inventario","l":"AgregarArticulo"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.mycompany.inventario","l":"Conexion"},{"p":"com.mycompany.inventario","l":"Inventario"},{"p":"com.mycompany.inventario","l":"Sistema"}];updateSearchResults();
