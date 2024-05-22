@@ -4,6 +4,8 @@
  */
 package com.mycompany.inventario;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -49,6 +51,8 @@ public class Sistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
+        setIconImage(getIconImage());
+        setIconImages(null);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -87,9 +91,6 @@ public class Sistema extends javax.swing.JFrame {
         jTableInventario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -97,23 +98,29 @@ public class Sistema extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableInventario.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTableInventario.setEditingColumn(0);
         jTableInventario.setEditingRow(0);
         jTableInventario.setRowHeight(30);
         jScrollPane1.setViewportView(jTableInventario);
         if (jTableInventario.getColumnModel().getColumnCount() > 0) {
             jTableInventario.getColumnModel().getColumn(0).setResizable(false);
+            jTableInventario.getColumnModel().getColumn(0).setPreferredWidth(59);
             jTableInventario.getColumnModel().getColumn(1).setResizable(false);
+            jTableInventario.getColumnModel().getColumn(1).setPreferredWidth(150);
             jTableInventario.getColumnModel().getColumn(2).setResizable(false);
+            jTableInventario.getColumnModel().getColumn(2).setPreferredWidth(300);
             jTableInventario.getColumnModel().getColumn(3).setResizable(false);
+            jTableInventario.getColumnModel().getColumn(3).setPreferredWidth(80);
             jTableInventario.getColumnModel().getColumn(4).setResizable(false);
+            jTableInventario.getColumnModel().getColumn(4).setPreferredWidth(80);
         }
 
         jTextBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -133,25 +140,26 @@ public class Sistema extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                        .addGap(473, 473, 473)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(43, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(294, 294, 294))
+                .addGap(31, 31, 31))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
+                .addComponent(jTextBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +170,7 @@ public class Sistema extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(42, 42, 42)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -171,7 +179,7 @@ public class Sistema extends javax.swing.JFrame {
                         .addComponent(btn_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,6 +196,7 @@ public class Sistema extends javax.swing.JFrame {
         AgregarArticulo nuevoArticulo = new AgregarArticulo();
         nuevoArticulo.setEstado(0);
         nuevoArticulo.revisarEstado();
+        nuevoArticulo.setTitle("Agregar articulo");
         nuevoArticulo.show();
         this.dispose();
     }//GEN-LAST:event_btn_NuevoActionPerformed
@@ -226,6 +235,7 @@ public class Sistema extends javax.swing.JFrame {
           nuevoArticulo.setPrecio(jTableInventario.getValueAt(index, 4).toString());
           nuevoArticulo.cargarDatos();
           nuevoArticulo.revisarEstado();
+          nuevoArticulo.setTitle("Modificar articulo");
           nuevoArticulo.show();
           this.dispose();
         }else{
@@ -251,19 +261,9 @@ public class Sistema extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+             UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");    
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -271,19 +271,27 @@ public class Sistema extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    UIManager.setLookAndFeel("com.jtattoo.plaf.smart.FastLookAndFeel");
-                } catch (Exception ex) {
-                    Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 new Sistema().setVisible(true);
             }
         });
     }
 
     public void actualizarTabla(DefaultTableModel model) {
-        jTableInventario.setModel(model);
+       jTableInventario.setModel(model);
+       jTableInventario.getColumnModel().getColumn(0).setPreferredWidth(59);
+       jTableInventario.getColumnModel().getColumn(1).setPreferredWidth(150);
+       jTableInventario.getColumnModel().getColumn(2).setPreferredWidth(300);
+       jTableInventario.getColumnModel().getColumn(3).setPreferredWidth(80);
+       jTableInventario.getColumnModel().getColumn(4).setPreferredWidth(80);
 
+    }
+    
+    @Override
+    public Image getIconImage() {
+       Image retValue = Toolkit.getDefaultToolkit().
+       getImage(ClassLoader.getSystemResource("Imagenes/inventario.png"));
+
+    return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
