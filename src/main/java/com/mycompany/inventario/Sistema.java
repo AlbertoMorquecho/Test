@@ -4,10 +4,7 @@
  */
 package com.mycompany.inventario;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +26,7 @@ public class Sistema extends javax.swing.JFrame {
      */
     public Sistema() {
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/inventario.png")).getImage());
     }
 
     /**
@@ -286,13 +284,6 @@ public class Sistema extends javax.swing.JFrame {
 
     }
     
-    @Override
-    public Image getIconImage() {
-       Image retValue = Toolkit.getDefaultToolkit().
-       getImage(ClassLoader.getSystemResource("Imagenes/inventario.png"));
-
-    return retValue;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Editar;
