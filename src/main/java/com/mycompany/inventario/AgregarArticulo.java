@@ -4,7 +4,6 @@
  */
 package com.mycompany.inventario;
 
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -101,6 +100,7 @@ public class AgregarArticulo extends javax.swing.JFrame {
      */
     public AgregarArticulo() {
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/inventario.png")).getImage());
         btn_Actualizar.setVisible(false);
         btn_Guardar.setVisible(false);
         
@@ -169,6 +169,11 @@ public class AgregarArticulo extends javax.swing.JFrame {
         });
 
         TFCantidad.setPreferredSize(new java.awt.Dimension(64, 24));
+        TFCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFCantidadKeyTyped(evt);
+            }
+        });
 
         TFDescripcion.setPreferredSize(new java.awt.Dimension(64, 24));
         TFDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -181,6 +186,11 @@ public class AgregarArticulo extends javax.swing.JFrame {
         TFPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TFPrecioActionPerformed(evt);
+            }
+        });
+        TFPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFPrecioKeyTyped(evt);
             }
         });
 
@@ -350,6 +360,35 @@ public class AgregarArticulo extends javax.swing.JFrame {
     private void TFPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TFPrecioActionPerformed
+
+    private void TFCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFCantidadKeyTyped
+        // TODO add your handling code here:
+        // Validacion de solo numeros en caja de texto
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+        
+        if (!numeros){
+            evt.consume();
+        }
+        if(TFCantidad.getText().length()>= 7){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFCantidadKeyTyped
+
+    private void TFPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFPrecioKeyTyped
+        // TODO add your handling code here:
+        
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57 || key == 46;
+        
+        if (!numeros){
+            evt.consume();
+        }
+        
+         if(TFPrecio.getText().length()>= 7){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFPrecioKeyTyped
 
     /**
      * @param args the command line arguments
