@@ -113,6 +113,7 @@ public class AgregarArticulo extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     
+    //Obtiene los datos a editar
     public void cargarDatos(){
         TFNombre.setText(getNombre());
         TFDescripcion.setText(getDescripcion());
@@ -121,6 +122,7 @@ public class AgregarArticulo extends javax.swing.JFrame {
         
     }
     
+    //Metodo que controla si el usuario ha hecho click en editar o dar de alta un nuevo articulo para hacer visible el boton respectivamente
     public void revisarEstado(){
         switch (getEstado()){
             case 0:
@@ -308,7 +310,7 @@ public class AgregarArticulo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
-        // TODO add your handling code here:
+        // Regresa a la ventana principal
         new Sistema().show();
         dispose();
     }//GEN-LAST:event_btn_CancelarActionPerformed
@@ -323,6 +325,7 @@ public class AgregarArticulo extends javax.swing.JFrame {
         setCantidad(TFCantidad.getText());
         setPrecio(TFPrecio.getText());
         
+        //Insertamos nuevo articulo con los datos ingresados
         conn.insertarArticulo(getNombre(), getDescripcion(), getCantidad(), getPrecio());
         new Sistema().show();
         dispose();
@@ -348,10 +351,12 @@ public class AgregarArticulo extends javax.swing.JFrame {
         // TODO add your handling code here:
         Conexion conn = new Conexion();
         String nombre, descripcion, cantidad, precio;
+        
         nombre = TFNombre.getText();
         descripcion = TFDescripcion.getText();
         cantidad = TFCantidad.getText();
         precio = TFPrecio.getText();
+        
         conn.actualizarArticulo(getId(), nombre, descripcion, cantidad, precio);
         new Sistema().show();
         dispose();
@@ -363,13 +368,16 @@ public class AgregarArticulo extends javax.swing.JFrame {
 
     private void TFCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFCantidadKeyTyped
         // TODO add your handling code here:
-        // Validacion de solo numeros en caja de texto
+        
         int key = evt.getKeyChar();
+        //Valida si los codigos ingresados pertenecen a valores numericos en codigo ASCII
         boolean numeros = key >= 48 && key <= 57;
         
+        // Validacion de solo numeros en caja de texto
         if (!numeros){
             evt.consume();
         }
+//        Limitacion a 7 digitos en caja de texto
         if(TFCantidad.getText().length()>= 7){
             evt.consume();
         }
@@ -379,12 +387,20 @@ public class AgregarArticulo extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int key = evt.getKeyChar();
+        //Valida si los codigos ingresados pertenecen a valores numericos en codigo ASCII
         boolean numeros = key >= 48 && key <= 57 || key == 46;
         
+         // Validacion de solo numeros en caja de texto
         if (!numeros){
             evt.consume();
         }
         
+        // Solo se permite ingresar el punto una sola vez
+        if(key == 46 && TFPrecio.getText().contains(".")){
+            evt.consume();
+        }
+        
+        //        Limitacion a 7 digitos en caja de texto
          if(TFPrecio.getText().length()>= 7){
             evt.consume();
         }

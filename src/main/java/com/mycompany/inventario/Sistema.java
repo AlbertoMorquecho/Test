@@ -4,7 +4,6 @@
  */
 package com.mycompany.inventario;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +48,7 @@ public class Sistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
+        setBackground(new java.awt.Color(104, 116, 242));
         setIconImage(getIconImage());
         setIconImages(null);
         setResizable(false);
@@ -193,12 +193,14 @@ public class Sistema extends javax.swing.JFrame {
 
     private void jTextBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBusquedaKeyReleased
         Conexion con = new Conexion();
+        //Actualiza la tabla buscando los datos ingresados en la caja de texto
         this.actualizarTabla(con.busqueda(jTextBusqueda.getText()));
     }//GEN-LAST:event_jTextBusquedaKeyReleased
 
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
         // TODO add your handling code here:
         AgregarArticulo nuevoArticulo = new AgregarArticulo();
+        //Declaramos el estado que posteriormente servira para mostrar en la ventana AgregarArticulo el boton guardar
         nuevoArticulo.setEstado(0);
         nuevoArticulo.revisarEstado();
         nuevoArticulo.setTitle("Agregar articulo");
@@ -214,7 +216,8 @@ public class Sistema extends javax.swing.JFrame {
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         // TODO add your handling code here:
         int index = jTableInventario.getSelectedRow();
-
+        
+        //Validamos que se haya seleccionado algun renglon y confirmamos la eliminacion
         if (index != -1 && JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar este articulo? ", "ATENCION", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
             int id = Integer.parseInt(jTableInventario.getValueAt(index, 0).toString());
             Conexion con = new Conexion();
@@ -232,7 +235,9 @@ public class Sistema extends javax.swing.JFrame {
         
         if(index != -1){
           AgregarArticulo nuevoArticulo = new AgregarArticulo();
+          //Declaramos el estado que posteriormente servira para mostrar en la ventana AgregarArticulo el boton actualizar
           nuevoArticulo.setEstado(1);
+          //Cargamos los datos seleccionados de la tabla de articulos
           nuevoArticulo.setId(jTableInventario.getValueAt(index, 0).toString());
           nuevoArticulo.setNombre(jTableInventario.getValueAt(index, 1).toString());
           nuevoArticulo.setDescripcion(jTableInventario.getValueAt(index, 2).toString());
@@ -254,6 +259,10 @@ public class Sistema extends javax.swing.JFrame {
         if (Character.isLowerCase(caracter) == true) {
             evt.setKeyChar(Character.toUpperCase(caracter));
         }
+        // Permite solo letras en la caja de texto de busqueda
+        if(!Character.isLetter(caracter)){
+            evt.consume();
+        }
     }//GEN-LAST:event_jTextBusquedaKeyTyped
 
     /**
@@ -266,7 +275,7 @@ public class Sistema extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-             UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");    
+             UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");    
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -282,6 +291,7 @@ public class Sistema extends javax.swing.JFrame {
     }
 
     public void actualizarTabla(DefaultTableModel model) {
+        //Construimos el modelo y las dimensiones de cada columna
        jTableInventario.setModel(model);
        jTableInventario.getColumnModel().getColumn(0).setPreferredWidth(59);
        jTableInventario.getColumnModel().getColumn(1).setPreferredWidth(150);

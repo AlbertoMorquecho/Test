@@ -10,8 +10,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -84,7 +82,6 @@ public class Conexion {
         DefaultTableModel modelo = new DefaultTableModel(titulos, 0);
         ResultSet rs = null;
         Statement stmt = obtenerConexion().createStatement();
-
         try {
             rs = stmt.executeQuery(consulta);
             while (rs.next()) {
@@ -92,7 +89,7 @@ public class Conexion {
                 registros[1] = rs.getString("NOMBRE");
                 registros[2] = rs.getString("DESCRIPCION");
                 registros[3] = rs.getString("CANTIDAD");
-                registros[4] = rs.getString("PRECIO");
+                registros[4] = "$" + rs.getString("PRECIO");
                 modelo.addRow(registros);
             }
             return modelo;
@@ -106,7 +103,7 @@ public class Conexion {
     
      public DefaultTableModel llenarTabla(){
         try {
-            return consultaSQL("select ID_ART, NOMBRE, DESCRIPCION, CANTIDAD, PRECIO from ARTICULO");
+            return consultaSQL("select ID_ART, NOMBRE, DESCRIPCION, CANTIDAD, PRECIO from ARTICULO order by ID_ART");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ha occurido un errror" + ex.getMessage());
         }
